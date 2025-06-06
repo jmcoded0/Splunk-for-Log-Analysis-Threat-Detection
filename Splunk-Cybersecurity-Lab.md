@@ -38,25 +38,25 @@ This first phase is all about prepping that Ubuntu virtual machine, making sure 
 
 * **My Action:** The very first step was to fire up VirtualBox and create a brand-new virtual machine specifically for Ubuntu. I made sure to give it enough RAM, CPU, and storage – gotta make Splunk happy, right?
 
-* **Screenshot:** This is where you'll show off the **VirtualBox "Create Virtual Machine" wizard**. Make sure it highlights that you've selected Linux (Ubuntu 64-bit) and the resources you've allocated (like memory or CPU cores).
-    <img width="960" alt="VirtualBox Create Virtual Machine Wizard" src="YOUR_SCREENSHOT_URL_HERE" />
+
 
 #### 1.2. **Installing Ubuntu OS**
 
 * **My Action:** After setting up the VM, I installed Ubuntu Server. I just followed the prompts, created my user account, and got the basic network stuff squared away.
 
-* **Screenshot:** Capture that moment! This screenshot should show the **Ubuntu Server installation progress screen**, or even better, the **final terminal login prompt** once the OS is successfully installed.
-    <img width="960" alt="Ubuntu Server Installation Progress" src="YOUR_SCREENSHOT_URL_HERE" />
+
 
 #### 1.3. **Setting Up My Network**
 
 * **My Action:** Networking can sometimes be a bit tricky, but it's crucial! I configured the network adapter for my Ubuntu VM. I usually go with a **Host-Only Adapter** or **Internal Network** to keep my lab isolated, and then add a **NAT Adapter** if I need internet access for updates.
 
-* **Screenshot:** This is your chance to show off your VirtualBox skills! Display the **VirtualBox VM settings for the Ubuntu VM**, specifically the "Network" section, illustrating how your adapters are set up (e.g., Adapter 1 as NAT, Adapter 2 as Host-Only Network).
-    <img width="960" alt="VirtualBox VM Network Settings" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** ![image](https://github.com/user-attachments/assets/9e4119d6-cfbb-43a4-a327-6e343358c1b9)
 
-* **Screenshot:** After configuring in VirtualBox, I jumped into the Ubuntu terminal to confirm everything. Show the **output of the `ip a` command** executed in the Ubuntu VM's terminal, clearly displaying the IP addresses for your network interfaces.
-    <img width="960" alt="Ubuntu ip a command output" src="YOUR_SCREENSHOT_URL_HERE" />
+  
+After configuring in VirtualBox, I jumped into the Ubuntu terminal to confirm everything was set up as expected from the OS side.
+* **Screenshot:** ![VirtualBox_Splunk_Server_Ubuntu_06_06_2025_03_44_37](https://github.com/user-attachments/assets/5d2180d5-536f-4ed7-9186-e33c44b45dda)
+
+    ![Ubuntu ip a command output]
 
 #### 1.4. **Getting SSH Ready (Server Installation and Configuration)**
 
@@ -66,15 +66,14 @@ This first phase is all about prepping that Ubuntu virtual machine, making sure 
     * **Command:** `sudo systemctl status ssh` (Checking that service!)
     * **Command:** `sudo ufw allow ssh` (Opening that port!)
 
-* **Screenshot:** Time to show off your terminal! This screenshot should capture the **terminal output** on your Ubuntu VM, showing the successful `openssh-server` installation, the `ssh` service status, and your `ufw` rule allowing SSH.
-    <img width="960" alt="SSH Service Status and UFW Rules" src="YOUR_SCREENSHOT_URL_HERE" />
 
 #### 1.5. **My First Remote SSH Connection**
 
 * **My Action:** The moment of truth! From my host machine (or even my Kali VM later), I tested SSH connectivity to my Ubuntu VM. Success feels good!
 
-* **Screenshot:** You'll want to show off your successful connection here. This screenshot should display a **successful SSH connection** from your host machine (or Kali) to the Ubuntu server, showing the terminal right after you've logged in with your username and password.
-    <img width="960" alt="Successful SSH Login to Ubuntu" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:**<img width="960" alt="image" src="https://github.com/user-attachments/assets/3f9435bc-05f5-4ead-8ade-d392f609ff70" />
+
+    Successful SSH Login to Ubuntu
 
 ### 2. 📦 **Installing Splunk Enterprise (Ubuntu VM) – The Big One!**
 
@@ -85,42 +84,46 @@ This is the core phase: getting Splunk Enterprise up and running on my freshly p
 * **My Action:** I used `wget` to grab the Splunk Enterprise Debian package (`.deb`) directly onto my Ubuntu VM. This saves a lot of hassle.
     * **Command:** `wget -O splunk-enterprise.deb 'https://download.splunk.com/products/splunk/releases/9.x.x/linux/splunk-9.x.x-amd64.deb'` (Just remember to swap out `9.x.x` for the actual version you're using!)
 
-* **Screenshot:** This is a two-in-one! Capture the **terminal output** during the `wget` command execution, showing the **download progress** of the Splunk package. Then, take another screenshot of the **terminal prompt *after* the download is complete**, confirming the file is sitting there, ready for action.
-    <img width="960" alt="Splunk Download Progress and Completion" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:**<img width="960" alt="ubuntu ss2" src="https://github.com/user-attachments/assets/615fbdfe-5375-4001-bda1-9800910c4262" />
+ This visual confirms the file is being pulled down.
+    Splunk Download Progress
 
-#### 2.2. **Installing Splunk Enterprise**
+* **Screenshot:** And then the completion! This separate screenshot should show the **terminal prompt after the `wget` command has finished downloading**, indicating the Splunk `.deb` file is now fully present in your directory and ready for installation. This verifies the file is locally available.
+    ![Splunk Download Completion](YOUR_SCREENSHOT_URL_HERE)
+
+#### 2.2. **Install Splunk Enterprise**
 
 * **My Action:** With the `.deb` file in hand, installing Splunk was straightforward using `dpkg`.
     * **Command:** `sudo dpkg -i splunk-enterprise.deb`
 
-* **Screenshot:** Show that installation in action! This screenshot should capture the **terminal output** as the `dpkg` command runs, displaying all those satisfying messages indicating successful package unpacking and setup.
-    <img width="960" alt="Splunk dpkg Installation Process" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** Show that installation in action! This screenshot should capture the **terminal output** as the `dpkg` command executes, displaying all those satisfying messages indicating successful package unpacking and setup progress. This confirms the Splunk files are being laid down.
+    ![Splunk dpkg Installation Process](YOUR_SCREENSHOT_URL_HERE)
 
-#### 2.3. **Starting Splunk and Accepting the License**
+#### 2.3. **Start Splunk and Accepting the License**
 
 * **My Action:** First boot! I started the Splunk service and, of course, had to agree to their license terms.
     * **Command:** `/opt/splunk/bin/splunk start --accept-license`
 
-* **Screenshot:** Get this moment! This screenshot should capture the **terminal output** showing Splunk spinning up, including the prompt where you agree to the license.
-    <img width="960" alt="Splunk Service Start and License Prompt" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** Get this moment! This screenshot should capture the **terminal output** showing Splunk spinning up, including the prompt to read and **accept the license agreement**. This is a critical step in getting Splunk operational.
+    ![Splunk Service Start and License Prompt](YOUR_SCREENSHOT_URL_HERE)
 
 #### 2.4. **Setting Up My Splunk Admin & Auto-Start**
 
 * **My Action:** Security first! I set a strong password for my Splunk admin user. Then, I made sure Splunk would automatically kick off every time the server boots up – super convenient.
     * **Command:** `/opt/splunk/bin/splunk enable boot-start`
 
-* **Screenshot:** Show those commands and their output! This screenshot should display the **terminal commands and their output** where you set the Splunk admin password and confirm that Splunk is now configured to start on boot.
-    <img width="960" alt="Splunk Admin Password and Boot-Start Configuration" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** Show those commands and their output! This screenshot should display the **terminal commands and their output** where you set the Splunk admin password (the interactive prompt) and confirm that Splunk has been configured to start on boot (e.g., "boot-start has been enabled"). This secures your Splunk instance and ensures persistence.
+    ![Splunk Admin Password and Boot-Start Configuration](YOUR_SCREENSHOT_URL_HERE)
 
 #### 2.5. **Accessing the Splunk Web Interface (Woohoo!)**
 
 * **My Action:** The payoff! I opened my web browser (on my host machine or Kali) and navigated to the Splunk web interface using my Ubuntu VM's IP address (usually `https://your_ubuntu_vm_ip:8000`). Then, I logged in with my shiny new admin credentials.
 
-* **Screenshot:** Capture the moment of truth! This screenshot should display the **Splunk Web Login page** as it appears in your browser.
-    <img width="960" alt="Splunk Web Login Page" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** Capture the moment of truth! This screenshot should display the **Splunk Web Login page** as it appears in your browser, clearly showing the fields for username and password. This indicates the web interface is reachable.
+    ![Splunk Web Login Page](YOUR_SCREENSHOT_URL_HERE)
 
-* **Screenshot:** And the ultimate victory! Show the **Splunk Home Dashboard** or the initial landing page right after you've successfully logged in. This confirms Splunk is fully operational.
-    <img width="960" alt="Splunk Home Dashboard After Login" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** And the ultimate victory! Show the **Splunk Home Dashboard** or initial landing page immediately after successfully logging into the web interface. This confirms Splunk is fully operational and you have access to its powerful features.
+    ![Splunk Home Dashboard After Login](YOUR_SCREENSHOT_URL_HERE)
 
 ### 3. 📤 **Setting Up My Log Forwarder (Kali Linux VM)**
 
@@ -130,18 +133,18 @@ Now that Splunk's ready, it's time to get some logs flowing! This phase involves
 
 * **My Action:** Just like Ubuntu, I spun up a new VM for Kali Linux and got the operating system installed. Ready to generate some logs!
 
-* **Screenshot:** Show off your Kali desktop! This screenshot should display the **Kali Linux desktop** after a successful installation, or even just the **Kali login screen**.
-    <img width="960" alt="Kali Linux Desktop or Login Screen" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** This screenshot should show the **Kali Linux desktop** after a successful installation, displaying its familiar interface, or the **Kali login screen** prompting for credentials. This marks the Kali VM as ready for configuration.
+    ![Kali Linux Desktop or Login Screen](YOUR_SCREENSHOT_URL_HERE)
 
 #### 3.2. **Network Configuration for Kali**
 
 * **My Action:** Again, network setup is key. I made sure Kali's network adapters were on the *same isolated network* as my Ubuntu VM. This lets them talk to each other without exposing them to the wider internet (unless I specifically want that for updates).
 
-* **Screenshot:** Show your VirtualBox settings for Kali here. This screenshot should display the **VirtualBox VM settings for the Kali VM**, specifically the "Network" section, showing how its adapters are configured.
-    <img width="960" alt="VirtualBox Kali Network Settings" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** Show your VirtualBox settings for Kali here. This screenshot should display the **VirtualBox VM settings for the Kali VM**, specifically the "Network" section, illustrating how its adapters are configured (e.g., the Host-Only or Internal Network adapter for communication with Ubuntu). This ensures Kali can reach the Splunk server.
+    ![VirtualBox Kali Network Settings](YOUR_SCREENSHOT_URL_HERE)
 
-* **Screenshot:** Confirm it in the terminal! This screenshot should show the **output of the `ip a` command** executed in the Kali terminal, clearly displaying its assigned IP addresses.
-    <img width="960" alt="Kali ip a command output" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** Confirm it in the terminal! This screenshot should show the **output of the `ip a` command** executed in the Kali terminal, clearly displaying its assigned IP addresses. This verifies Kali's network connectivity within the lab.
+    ![Kali ip a command output](YOUR_SCREENSHOT_URL_HERE)
 
 #### 3.3. **Downloading and Installing the Splunk Universal Forwarder**
 
@@ -149,8 +152,8 @@ Now that Splunk's ready, it's time to get some logs flowing! This phase involves
     * **Command:** `wget -O splunkforwarder.deb 'https://download.splunk.com/products/universalforwarder/releases/9.x.x/linux/splunkforwarder-9.x.x-amd64.deb'`
     * **Command:** `sudo dpkg -i splunkforwarder.deb`
 
-* **Screenshot:** Show the download and install commands running in Kali's terminal. This screenshot should capture the **terminal output** showing the `wget` command downloading the forwarder package and the subsequent `dpkg` command installing it.
-    <img width="960" alt="Splunk Universal Forwarder Download and Installation" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** This screenshot should capture the **terminal output** showing both the `wget` command downloading the forwarder package (showing progress) and the subsequent `dpkg` command installing it. This visual confirms the forwarder software is being deployed on Kali.
+    ![Splunk Universal Forwarder Download and Installation](YOUR_SCREENSHOT_URL_HERE)
 
 #### 3.4. **Configuring the Universal Forwarder to Send Logs**
 
@@ -174,27 +177,27 @@ Now that Splunk's ready, it's time to get some logs flowing! This phase involves
         sourcetype = linux_auth
         ```
 
-* **Screenshot:** This is an important one! Show the content of both the **`outputs.conf` and `inputs.conf` files** open in a text editor (like `nano` or `vi`) within the Kali terminal, clearly displaying the stanzas you've configured.
-    <img width="960" alt="Universal Forwarder outputs.conf and inputs.conf Configuration" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** This is an important one! Show the content of both the **`outputs.conf` and `inputs.conf` files** open in a text editor (like `nano` or `vi`) within the Kali terminal. The screenshot should clearly display the configured stanzas, especially the `server` IP in `outputs.conf` and the `monitor` paths in `inputs.conf`. This is key to getting logs flowing.
+    ![Universal Forwarder outputs.conf and inputs.conf Configuration](YOUR_SCREENSHOT_URL_HERE)
 
-#### 3.5. **Starting and Enabling the Universal Forwarder**
+#### 3.5. **Start and Enable Universal Forwarder**
 
 * **My Action:** After configuration, I started the Splunk Universal Forwarder service on Kali and made sure it would automatically start on boot.
     * **Command:** `/opt/splunkforwarder/bin/splunk start --accept-license`
     * **Command:** `/opt/splunkforwarder/bin/splunk enable boot-start`
 
-* **Screenshot:** Capture the terminal confirming the forwarder is alive and set to auto-start. This screenshot should show the **terminal output** on Kali showing the forwarder service starting up and the confirmation that it has been enabled to start on boot.
-    <img width="960" alt="Universal Forwarder Start and Enable Boot-Start" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** Capture the terminal confirming the forwarder is alive and set to auto-start. This screenshot should show the **terminal output** on Kali showing the forwarder service starting up, including the license acceptance, and the confirmation that it has been enabled to start on boot. This ensures your Kali logs will continuously be sent to Splunk.
+    ![Universal Forwarder Start and Enable Boot-Start](YOUR_SCREENSHOT_URL_HERE)
 
 #### 3.6. **Configuring Data Input on Splunk Enterprise (The Receiving End!)**
 
 * **My Action:** My forwarder is sending logs, but Splunk needs to know to *receive* them! On the Splunk Enterprise web interface, I navigated to **Settings > Data Inputs > Forwarded inputs** and added a new TCP input on port `9997` (the same port the forwarder is sending to!).
 
-* **Screenshot:** Show how you set this up in Splunk's GUI. This screenshot should display the **Splunk Web UI** showing the steps or a summary of the configuration for creating a new "Forwarded inputs" on port `9997` on the Splunk Enterprise server.
-    <img width="960" alt="Splunk Web UI - Forwarded Input Configuration" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** Show how you set this up in Splunk's GUI. This screenshot should display the **Splunk Web UI** showing the steps or a summary of the configuration for creating a new "Forwarded inputs" on port `9997` on the Splunk Enterprise server. This is the crucial step on the Splunk server side to accept incoming logs.
+    ![Splunk Web UI - Forwarded Input Configuration](YOUR_SCREENSHOT_URL_HERE)
 
-* **Screenshot:** The ultimate validation! Show a view within Splunk (maybe the **"Receive data"** section or a quick search in `index=_internal` for forwarder health) confirming that data is actively being received from your Kali forwarder. It's working!
-    <img width="960" alt="Splunk Web UI - Data Receive Confirmation" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** The ultimate validation! Show a view within Splunk (perhaps the **"Receive data"** section in the Data Inputs settings, or a quick search in `index=_internal` for forwarder health status, like `sourcetype=splunkd group=thruput host=<kali_hostname>`) confirming that data is actively being received from your Kali forwarder. It's working!
+    ![Splunk Web UI - Data Receive Confirmation](YOUR_SCREENSHOT_URL_HERE)
 
 ### 4. 📈 **Data Ingestion & Event Simulation: Making Some Noise!**
 
@@ -204,22 +207,22 @@ Now that the pipes are connected, it's time to actually generate some events on 
 
 * **My Action:** To get some data flowing, I performed various actions on Kali Linux that would naturally generate common system logs. Think of it as creating a little digital ruckus!
     * **Command (Simulating failed SSH login attempts):** `ssh fakeuser@localhost` (I ran this a few times to generate some "failed password" entries!)
-    * **Command (Generating sudo usage logs):** `sudo whoami` (Simple, but effective for log generation)
+    * **Command (Sudo usage):** `sudo whoami` (Simple, but effective for log generation)
     * **Command (Running a small Nmap scan):** `nmap -sS -p 1-100 127.0.0.1` (This generates network-related logs, if your forwarder is set up to capture them!)
 
-* **Screenshot:** Show those commands in action! This screenshot should capture your **Kali terminal** showing the execution of several commands designed to generate security-relevant logs.
-    <img width="960" alt="Kali Linux Log Generation Commands" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** Show those commands in action! This screenshot should capture your **Kali terminal** showing the execution of several commands designed to generate security-relevant logs. You might see the commands being typed, and their immediate output, signifying activity on the system.
+    ![Kali Linux Log Generation Commands](YOUR_SCREENSHOT_URL_HERE)
 
 #### 4.2. **Verifying Data Ingestion in Splunk (The Payoff!)**
 
 * **My Action:** After generating logs on Kali, I immediately jumped back to the Splunk Enterprise web interface. I went to the **Search & Reporting** app and searched for `index=main` or `source="/var/log/syslog"` to confirm that logs from my Kali machine were indeed pouring in. It's such a satisfying feeling to see them!
 
-* **Screenshot:** This is the proof! Display the **Splunk Search & Reporting interface** with your search query (e.g., `index=main host=<kali_hostname>`) and the resulting raw events or a filtered list of events from your Kali machine. Highlight those Kali logs!
-    <img width="960" alt="Splunk Search and Reporting - Raw Events from Kali" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** This is the proof! Display the **Splunk Search & Reporting interface** with your search query (e.g., `index=main host=<kali_hostname>`). The screenshot should clearly show the resulting raw events or a filtered list of events specifically originating from your Kali machine, demonstrating successful log ingestion. Highlight those Kali logs!
+    ![Splunk Search and Reporting - Raw Events from Kali](YOUR_SCREENSHOT_URL_HERE)
 
 ### 5. 🕵️ **Threat Detection & Analysis with SPL: Becoming a Cyber Sleuth!**
 
-This is the really cool part – using Splunk's powerful Search Processing Language (SPL) to actually dig through those logs and uncover potential security threats or anomalies. It's like being a detective!
+This phase focuses on using Splunk's Search Processing Language (SPL) to analyze the ingested logs and identify potential security threats or anomalies.
 
 #### 5.1. **Basic Log Search and Filtering**
 
@@ -227,31 +230,31 @@ This is the really cool part – using Splunk's powerful Search Processing Langu
     * **Example SPL:** `index=main sourcetype=syslog host=<kali_hostname>` (Just grabbing all syslog events from Kali)
     * **Example SPL:** `index=main "failed password"` (Quickly finding all failed login attempts)
 
-* **Screenshot:** Show your basic search! This screenshot should display the **Splunk Search interface** with a simple SPL query and the corresponding search results, demonstrating your filtering capabilities.
-    <img width="960" alt="Splunk Search - Basic Log Filtering" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** This screenshot should show the **Splunk Search interface** with a basic SPL query in the search bar (e.g., `index=main sourcetype=syslog`) and the corresponding search results below, demonstrating the ability to filter and view specific log data.
+    ![Splunk Search - Basic Log Filtering](YOUR_SCREENSHOT_URL_HERE)
 
 #### 5.2. **Detecting Brute-Force Attempts**
 
 * **My Action:** This is a classic! I used SPL to look for multiple failed login attempts coming from the same source within a short time. This is a common indicator of a brute-force attack.
     * **Example SPL:** `index=main "failed password" | stats count by src_ip | where count > 5` (This query counts failed passwords by source IP and then filters for IPs with more than 5 attempts.)
 
-* **Screenshot:** Show your brute-force detection query and its results! This screenshot should display the **Splunk Search interface** with the SPL query for detecting brute-force attempts and the resulting statistical table or visualization.
-    <img width="960" alt="Splunk Search - Brute-Force Detection" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** Show your brute-force detection query and its results! This screenshot should display the **Splunk Search interface** with the SPL query for detecting brute-force attempts in the search bar. The results should show a statistical table or a visualization (like a bar chart) highlighting source IPs with a high count of failed logins.
+    ![Splunk Search - Brute-Force Detection](YOUR_SCREENSHOT_URL_HERE)
 
 #### 5.3. **Identifying Port Scans**
 
 * **My Action:** Another common threat: port scanning. If I had network logs properly captured and forwarded (which is a bit more advanced but totally doable!), I'd use SPL to spot patterns indicative of port scanning. Even with system logs, you can sometimes see remnants.
     * **Example SPL (requires network logs like Zeek or other firewall/IDS logs):** `index=main sourcetype=zeek_conn | stats distinct_count(dest_port) by src_ip | where distinct_count(dest_port) > 10` (This looks for source IPs that have tried to connect to many different destination ports.)
 
-* **Screenshot:** Show an example of how you'd look for a port scan. This screenshot should display the **Splunk Search interface** with an SPL query designed to identify port scanning activity and the associated search results.
-    <img width="960" alt="Splunk Search - Port Scan Identification" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** This screenshot should show the **Splunk Search interface** with an SPL query designed to identify port scanning activity (or a similar network-related anomaly) in the search bar. The results should ideally display a table or visualization that helps confirm the suspicious activity.
+    ![Splunk Search - Port Scan Identification](YOUR_SCREENSHOT_URL_HERE)
 
 #### 5.4. **Creating Alerts or Dashboards (Optional but Cool!)**
 
 * **My Action:** If I had more time, I'd totally build out some alerts or dashboards. Alerts would notify me immediately of a potential threat, and dashboards would give me a sweet visual overview of my lab's security posture. This is where Splunk really shines for continuous monitoring!
 
-* **Screenshot:** If you tried this, show it! This screenshot should capture either the **configuration page for a Splunk Alert** based on one of your threat detection queries, or a **simple Splunk Dashboard** displaying relevant security metrics or visualizations you've created.
-    <img width="960" alt="Splunk Alert Configuration or Basic Dashboard" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** If you tried this, show it! This screenshot should capture either the **configuration page for a Splunk Alert** (showing the trigger conditions and actions) based on one of your threat detection queries, or a **simple Splunk Dashboard** displaying relevant security metrics or visualizations you've created (e.g., log counts over time, top source IPs for failed logins).
+    ![Splunk Alert Configuration or Basic Dashboard](YOUR_SCREENSHOT_URL_HERE)
 
 ### 6. 📝 **My Conclusion & What I Learned (Lessons from the Lab!)**
 
@@ -263,8 +266,8 @@ Wrapping up this project, it's cool to reflect on what I achieved and what hitch
 * **Demonstrated end-to-end log collection:** I got logs flowing from my Kali machine right into my SIEM – super satisfying!
 * **Applied SPL for basic log analysis and threat detection:** I got my hands dirty with searches and even some basic threat hunting.
 
-* **Screenshot:** Let's end with a visual summary! This concluding screenshot could be an **overview of the Splunk Apps page**, or even a **final custom dashboard** you've made that sums up the data and insights gained from your lab.
-    <img width="960" alt="Splunk App Overview or Final Lab Dashboard" src="YOUR_SCREENSHOT_URL_HERE" />
+* **Screenshot:** Let's end with a visual summary! This concluding screenshot could be an **overview of the Splunk Apps page** (showing the various installed apps), or even a **final custom dashboard** you've made that sums up the data and insights gained from your lab, providing a sense of completion.
+    ![Splunk App Overview or Final Lab Dashboard](YOUR_SCREENSHOT_URL_HERE)
 
 #### 6.2. **Challenges I Ran Into (And How I Overcame Them!)**
 
@@ -281,16 +284,4 @@ This lab was packed with learning! Here are some of my biggest takeaways:
 * **Centralized Logging is a Game Changer:** Seriously, having all your logs in one place (thanks, Splunk!) makes spotting threats so much easier. It's the core of effective security monitoring.
 * **Threat Hunting Basics are Crucial:** Getting hands-on with searching for indicators of compromise (IOCs) and weird behavior using SPL is invaluable. It's not just theory anymore!
 * **Data Normalization Makes Sense:** Seeing how different `sourcetypes` and fields help structure the data for analysis really clicked during this project.
-* **Lab Environments are Gold:** Building and experimenting in a controlled environment like this is absolutely the best way to learn and develop skills without messing with live systems.
-
----
-
-**To copy this content:**
-
-1.  **Click anywhere inside this gray code block.**
-2.  **Select all the text:** On Windows/Linux, press `Ctrl + A`. On Mac, press `Cmd + A`.
-3.  **Copy the selected text:** On Windows/Linux, press `Ctrl + C`. On Mac, press `Cmd + C`.
-
----
-
-How does this version feel? Does it capture that personal, "I built this!" vibe you're going for? Let me know what you think, and then we can continue documenting your Splunk lab journey!
+* **Lab Environments are Gold:** Building and experimenting in a controlled environment like this is absolutely the best way to learn and develop skills without risking production systems.
