@@ -1,37 +1,79 @@
-# Splunk-Cybersecurity-Lab-
-Setting up a cybersecurity lab with Splunk for log analysis and threat detection.
-
-
-# Cybersecurity Project: Splunk Log Analysis & Threat Detection Lab
-
-## Project Overview
-
-This repository documents the setup and configuration of a virtualized cybersecurity lab environment utilizing Splunk Enterprise. The project aims to demonstrate end-to-end security monitoring, from log collection to threat detection and analysis, using industry-standard tools.
-
-### Key Components:
-* **Splunk Enterprise:** For SIEM capabilities, log indexing, searching, and visualization.
-* **Ubuntu Server:** Hosts the Splunk Enterprise instance.
-* **Kali Linux:** Used as an attacker machine and a source for security logs.
-* **VirtualBox:** The virtualization platform for creating the lab environment.
-* **SSH:** For reliable remote access and management of VMs.
-
-## Detailed Lab Setup & Walkthrough
-
-For a comprehensive, step-by-step guide on setting up this lab, including all commands, configurations, and screenshots, please refer to the main guide:
-
-👉 [**Go to the Full Setup Guide**](docs/FULL_SETUP_GUIDE.md) 👈
+# 🛡️ Splunk Cybersecurity Lab  
+**Setting up a cybersecurity lab with Splunk for log analysis and threat detection**
 
 ---
 
-## Project Phases:
+## 🔍 Project Overview
 
-This project is structured into the following phases:
-
-1.  **Splunk Server Preparation & SSH Access:** Setting up the Ubuntu VM, updating the OS, installing SSH server, and configuring VirtualBox for remote access.
-2.  **Splunk Enterprise Installation:** Downloading, installing, and performing initial configuration of Splunk Enterprise on the Ubuntu server.
-3.  **Universal Forwarder Deployment:** Installing and configuring Splunk Universal Forwarder on the Kali Linux VM to collect logs.
-4.  **Data Ingestion & Event Generation:** Configuring Splunk to receive data and simulating security events from Kali Linux.
-5.  **Threat Detection & Analysis:** Utilizing Splunk Search Processing Language (SPL) to identify, analyze, and visualize security incidents.
-6.  **Conclusion & Learnings:** Summarizing the project outcomes and key takeaways.
+This project documents the setup of a **virtual cybersecurity lab** using **Splunk Enterprise** to simulate real-world **log collection**, **threat detection**, and **incident analysis**. The lab showcases how to use Splunk as a SIEM solution in a controlled, hands-on environment.
 
 ---
+
+## 🧩 Key Components
+
+- **Splunk Enterprise** – Central SIEM platform for indexing and analyzing logs  
+- **Ubuntu Server** – Hosts the Splunk Enterprise instance  
+- **Kali Linux** – Acts as an attacker/log generator machine  
+- **VirtualBox** – Used to virtualize the entire lab environment  
+- **SSH** – Enables secure remote access to Ubuntu and Kali VMs
+
+---
+
+## 🧱 Lab Setup & Walkthrough
+
+📘 **Full Guide Available:**  
+👉 [View Full Setup Instructions](docs/FULL_SETUP_GUIDE.md)
+
+Includes:
+- VM creation
+- Network configs
+- Splunk installation
+- Data forwarding setup
+- SPL queries for analysis
+
+---
+
+## 🧪 Project Phases
+
+1. **🔧 Splunk Server Setup & SSH Access**  
+   Configure Ubuntu VM, enable SSH, update packages, and prep for Splunk install.
+
+2. **📦 Splunk Enterprise Installation**  
+   Download and install Splunk on Ubuntu. Set up admin access and enable the web interface.
+
+3. **📤 Log Forwarder Setup**  
+   Deploy **Splunk Universal Forwarder** on Kali Linux. Configure it to send logs to the Splunk server.
+
+4. **📈 Data Ingestion & Event Simulation**  
+   Simulate system events and attacks (e.g., port scanning, brute force) on Kali and forward logs.
+
+5. **🕵️ Threat Detection & Analysis**  
+   Use **SPL (Search Processing Language)** in Splunk to detect anomalies and generate insights.
+
+6. **📝 Conclusion & Learnings**  
+   Summarize outcomes, challenges, and what you learned from the setup and threat detection.
+
+---
+
+## 📌 Technologies Used
+
+- Ubuntu 22.04 / 24.04  
+- Splunk Enterprise 9.x  
+- Kali Linux  
+- Splunk Universal Forwarder  
+- VirtualBox  
+- SSH
+
+---
+
+## 🧠 Lessons Learned
+
+- Hands-on experience with SIEM tools and log management  
+- Importance of **centralized logging** in threat detection  
+- Understanding of **SPL** queries and dashboarding  
+- Basic attacker behavior emulation in a safe lab setup
+
+---
+
+> 🚀 This lab was created for personal learning, portfolio development, and demonstration of cybersecurity skills using industry tools.
+
