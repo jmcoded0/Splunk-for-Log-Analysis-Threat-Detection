@@ -158,15 +158,11 @@ sourcetype = linux_auth
 
 #### 3.4. **Configuring Data Input on Splunk Enterprise (The Receiving End on Kali!)**
 
-* **My Action:** My forwarder is sending logs, but Splunk needs to know to *receive* them! On the Splunk Enterprise web interface (which is on Kali itself), I navigated to **Settings > Data Inputs > Forwarded inputs** and added a new TCP input on port `9997` (the same port the forwarder is sending to!).
+* **My Action:** My forwarder is sending logs, but Splunk needs to know to *receive* them! On the Splunk Enterprise web interface (which is on Kali itself), I navigated to **Settings > Data Inputs > Forwarded inputs** and added a new TCP input on port `9998` (the same port the forwarder is sending to!).
 
 
-![Splunk Web UI - Forwarded Input Configuration on Kali]![VirtualBox_kali linux_19_06_2025_03_58_01](https://github.com/user-attachments/assets/5a3b8c68-1411-4215-b4b0-5e956fcad5d4)
+![Splunk Web UI - Forwarded Input Configuration on Kali]![VirtualBox_kali linux_19_06_2025_03_58_01]![VirtualBox_Kali Linux_25_06_2025_03_11_11](https://github.com/user-attachments/assets/eff55e03-5335-4554-9501-3dd17e70a0eb)
 
-* **Screenshot:**
-**Show a view within Splunk confirming that data is actively being received from the Kali forwarder.**
-**This could be from the "Receive data" section or a search of `index=_internal` for forwarder health.**
-![Splunk Web UI - Data Receive Confirmation on Kali](YOUR_SCREENSHOT_URL_HERE)
 
 ### 4. 📈 **Data Ingestion & Event Simulation: Making Some Noise!**
 
@@ -179,19 +175,16 @@ Now that the pipes are connected, it's time to actually generate some events on 
 * **Command (Sudo usage):** `sudo whoami` (Simple, but effective for log generation)
 * **Command (Running a small Nmap scan):** `nmap -sS -p 1-100 127.0.0.1` (This generates network-related logs, if your forwarder is set up to capture them!)
 
-* **Screenshot:**
-**Capture your Kali terminal showing the execution of several commands.**
-**These commands should be designed to generate security-relevant logs.**
-![Kali Linux Log Generation Commands](YOUR_SCREENSHOT_URL_HERE)
+
+![Kali Linux Log Generation Commands]![VirtualBox_Kali Linux_25_06_2025_03_33_09](https://github.com/user-attachments/assets/bec308f0-3f36-4b3b-9138-63fce22e6723)
 
 #### 4.2. **Verifying Data Ingestion in Splunk (The Payoff!)**
 
 * **My Action:** After generating logs on Kali, I immediately jumped back to the Splunk Enterprise web interface. I went to the **Search & Reporting** app and searched for `index=main` or `source="/var/log/syslog"` to confirm that logs from my Kali machine were indeed pouring in. It's such a satisfying feeling to see them!
 
-* **Screenshot:**
-**Display the Splunk Search & Reporting interface with your search query.**
-**Clearly show the resulting raw events or a filtered list of events from Kali.**
-![Splunk Search and Reporting - Raw Events from Kali](YOUR_SCREENSHOT_URL_HERE)
+
+![Splunk Search and Reporting - Raw Events from Kali]![VirtualBox_Kali Linux_25_06_2025_03_06_30](https://github.com/user-attachments/assets/8d0e4163-a104-4c5b-836f-5e1acfb40052)
+
 
 ### 5. 🕵️ **Threat Detection & Analysis with SPL: Becoming a Cyber Sleuth!**
 
@@ -203,39 +196,32 @@ This phase focuses on using Splunk's Search Processing Language (SPL) to analyze
 * **Example SPL:** `index=main sourcetype=syslog host=` (Just grabbing all syslog events from Kali)
 * **Example SPL:** `index=main "failed password"` (Quickly finding all failed login attempts)
 
-* **Screenshot:**
-**Show the Splunk Search interface with a basic SPL query in the search bar.**
-**Display the corresponding search results, demonstrating filtering capabilities.**
-![Splunk Search - Basic Log Filtering](YOUR_SCREENSHOT_URL_HERE)
+
+![Splunk Search - Basic Log Filtering]![VirtualBox_Kali Linux_25_06_2025_03_51_19](https://github.com/user-attachments/assets/7af54e48-7f04-4738-9dbb-793e7ae174b6)
+
 
 #### 5.2. **Detecting Brute-Force Attempts**
 
 * **My Action:** This is a classic! I used SPL to look for multiple failed login attempts coming from the same source within a short time. This is a common indicator of a brute-force attack.
-* **Example SPL:** `index=main "failed password" | stats count by src_ip | where count > 5` (This query counts failed passwords by source IP and then filters for IPs with more than 5 attempts.)
+* **Example SPL:** `index=main sourcetype=dpkg_log | timechart count by host` (This query counts failed passwords by source IP and then filters for IPs with more than 5 attempts.)
 
-* **Screenshot:**
-**Display the Splunk Search interface with the SPL query for detecting brute-force attempts.**
-**Show the resulting statistical table or visualization.**
-![Splunk Search - Brute-Force Detection](YOUR_SCREENSHOT_URL_HERE)
+![Splunk Search - Brute-Force Detection]![VirtualBox_Kali Linux_25_06_2025_03_56_18](https://github.com/user-attachments/assets/40097d98-bf9a-40c7-aba0-9985e3527ae7)
 
-#### 5.3. **Identifying Port Scans**
+#### 5.3. **Analyzing Package Activity (Illustrative Detection)**
 
-* **My Action:** Another common threat: port scanning. If I had network logs properly captured and forwarded (which is a bit more advanced but totally doable!), I'd use SPL to spot patterns indicative of port scanning. Even with system logs, you can sometimes see remnants.
-* **Example SPL (requires network logs like Zeek or other firewall/IDS logs):** `index=main sourcetype=zeek_conn | stats distinct_count(dest_port) by src_ip | where distinct_count(dest_port) > 10` (This looks for source IPs that have tried to connect to many different destination ports.)
+* **My Action:** While actual port scan detection typically requires network-specific logs (which I currently don't have flowing), I used SPL to analyze a different type of activity: package installation and removal events from my `dpkg.log`. This demonstrates the power of SPL for identifying patterns within existing log sources. I looked for instances of "installed" packages and grouped them by host to understand common software changes.
+* **Example SPL:** `index=main sourcetype=dpkg_log "installed" | stats count by host` (This query counts how many "installed" events occurred for each host.)
 
-* **Screenshot:**
-**Show the Splunk Search interface with an SPL query designed to identify port scanning activity.**
-**Display the associated search results.**
-![Splunk Search - Port Scan Identification](YOUR_SCREENSHOT_URL_HERE)
+
+    ![Splunk Search - Package Activity Analysis]![VirtualBox_Kali Linux_25_06_2025_04_10_30](https://github.com/user-attachments/assets/1acca73e-5acf-4357-b0b5-77c4cf9cb32b)
+
 
 #### 5.4. **Creating Alerts or Dashboards (Optional but Cool!)**
 
 * **My Action:** If I had more time, I'd totally build out some alerts or dashboards. Alerts would notify me immediately of a potential threat, and dashboards would give me a sweet visual overview of my lab's security posture. This is where Splunk really shines for continuous monitoring!
 
-* **Screenshot:**
-**Capture either the configuration page for a Splunk Alert based on a threat detection query.**
-**Alternatively, show a simple Splunk Dashboard displaying relevant security metrics or visualizations.**
-![Splunk Alert Configuration or Basic Dashboard](YOUR_SCREENSHOT_URL_HERE)
+
+![Splunk Alert Configuration or Basic Dashboard]![VirtualBox_Kali Linux_25_06_2025_04_20_23](https://github.com/user-attachments/assets/9dd9eff7-746b-4277-8a26-0d806abf3d5a)
 
 ### 6. 📝 **My Conclusion & What I Learned (Lessons from the Lab!)**
 
@@ -247,10 +233,8 @@ Wrapping up this project, it's cool to reflect on what I achieved and what hitch
 * **Demonstrated end-to-end log collection:** I got logs flowing from my Kali machine right into my SIEM – super satisfying!
 * **Applied SPL for basic log analysis and threat detection:** I got my hands dirty with searches and even some basic threat hunting.
 
-* **Screenshot:**
-**Display an overview of the Splunk Apps page or a final custom dashboard.**
-**This should summarize the data ingested and insights gained from the lab.**
-![Splunk App Overview or Final Lab Dashboard](YOUR_SCREENSHOT_URL_HERE)
+
+![Splunk App Overview or Final Lab Dashboard]![VirtualBox_Kali Linux_25_06_2025_04_31_20](https://github.com/user-attachments/assets/7318fab7-1650-450c-b3c4-9985f1e8027b)
 
 #### 6.2. **Challenges I Ran Into (And How I Overcame Them!)**
 
