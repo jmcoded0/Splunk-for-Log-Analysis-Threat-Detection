@@ -21,8 +21,7 @@ This project documents the setup of a **virtual cybersecurity lab** using **Splu
 ## 🧱 Lab Setup & Walkthrough
 
 📘 **Full Lab Documentation with Screenshots & Commands:**  
-👉 [View Full Lab Guide](./Splunk-Cybersecurity-Lab.md)
-
+👉 [View Full Lab Guide](https://github.com/jmcoded0/Splunk-Cybersecurity-Lab-/blob/main/docs/Splunk-Cybersecurity-Lab.md)
 Includes:
 - Kali VM setup
 - Network configuration
