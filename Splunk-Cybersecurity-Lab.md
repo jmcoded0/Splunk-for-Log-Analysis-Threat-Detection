@@ -130,7 +130,7 @@ Now that Splunk's ready, it's time to get some logs flowing from Kali *into its 
 defaultGroup = default_group
 
 [tcpout:default_group]
-server = 127.0.0.1:9997 # Sending logs to localhost (itself)
+server = 127.0.0.1:9998 # Sending logs to localhost (itself)
 ```
 
 * **Editing `inputs.conf` (`/opt/splunkforwarder/etc/system/local/inputs.conf`):** This file tells the forwarder *what* logs to monitor and send. I set it up to grab the system logs (`syslog`) and authentication logs (`auth.log`).
