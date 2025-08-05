@@ -1,7 +1,4 @@
-# 🛡️ Splunk Cybersecurity Lab  
-**Setting up a cybersecurity lab with Splunk for log analysis and threat detection**
-
----
+# 🛡️ Splunk for Log Analysis & Threat Detection
 
 ## 🔍 Project Overview
 
